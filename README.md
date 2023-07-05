@@ -1,4 +1,4 @@
-# Binary Super-Resolution Challenge
+# Binary Super-Resolution Challenge 2023
 
 * [Description](#sec-description)
     - [Goal](#subsec-goal)
