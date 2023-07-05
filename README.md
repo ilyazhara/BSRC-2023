@@ -11,7 +11,7 @@
     - [Final metric](#subsec-final-metric)
 * [Submission](#sec-submission)
     - [Description](#subsec-description)
-    - [Testingc](#subsec-testing)
+    - [Testing](#subsec-testing)
 * [Baselines](#sec-baselines)
     - [Requirements and Installation](#subsec-requirements-and-installation)
     - [Downloading datasets](#subsec-downloading-datasets)
