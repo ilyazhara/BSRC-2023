@@ -1,0 +1,23 @@
+# Folders
+*__pycache__
+.vscode
+
+# vscode
+.env
+
+# ML
+*.pth
+
+# Python files
+*.pyc
+*.pyo
+*.log
+*.npy
+
+# Exports
+*.onnx
+
+# Downloading archives
+*.gz
+*.tar
+*.zip

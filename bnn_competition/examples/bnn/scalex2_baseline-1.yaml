@@ -1,0 +1,42 @@
+# Dataset
+dataset: &dataset !DIV2KDataloader
+  batch_size: 32
+  patch_size: 96
+  scale: &scale 2
+
+# Optimizers
+optimizers: &optimizers
+  weight_optimizer: 
+    name: Adam
+    params:
+      lr: 0.0004
+    scheduler:
+      name: CosineAnnealingLR
+      params:
+        T_max: 150000
+
+training_loop: &training_loop !TrainingLoop
+  dataset: *dataset
+  model: !BinaryScalex2BaselineV1
+    group_size: 16
+    n_blocks_skip: 2
+  loss: !L1Loss
+  train_metrics:
+    PSNR: !PSNR
+      min_val: 0
+      max_val: 255
+      boundary_size: *scale
+  val_metrics:
+    PSNR: !PSNR
+      min_val: 0
+      max_val: 255
+      boundary_size: *scale
+
+task: !Task
+  training_loop: *training_loop
+  epochs: 6000 # 150000 iterations
+  optimizers: *optimizers
+  model_saver:
+    monitor: "val_PSNR"
+    mode: max
+  check_val_every_n_epochs: 50
