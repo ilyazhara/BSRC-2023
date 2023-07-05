@@ -1,20 +1,40 @@
 # Binary Super-Resolution Challenge
 
-[[_TOC_]]
+* [Description](#sec-description)
+    - [Goal](#subsec-goal)
+    - [Models](#subsec-models)
+    - [Restrictions](#subsec-restrictions)
+* [Evaluation](#sec-evaluation)
+    - [Complexity metric](#subsec-complexity-metric)
+    - [Quality metric](#subsec-quality-metric)
+    - [Scoring metric](#subsec-scoring-metric)
+    - [Final metric](#subsec-final-metric)
+* [Submission](#sec-submission)
+    - [Description](#subsec-description)
+    - [Testingc](#subsec-testing)
+* [Baselines](#sec-baselines)
+    - [Requirements and Installation](#subsec-requirements-and-installation)
+    - [Downloading datasets](#subsec-downloading-datasets)
+    - [Training](#subsec-training)
+    - [Evaluating](#subsec-evaluating)
 
+<a name="sec-description"></a>
 ## Description
 
+<a name="subsec-goal"></a>
 ### Goal
 
 The goal of the challenge is to achieve the partially or fully binary models for super-resolution task for **x2** and **x4** scales ($`\text{model}_{\text{x2}}^{\text{bin}}`$ and $`\text{model}_{\text{x4}}^{\text{bin}}`$).  
 The less complexity metric the model has, the better.  
 The more peak signal-to-noise ratio (PSNR) the model has on test dataset, the better.
 
+<a name="subsec-models"></a>
 ### Models
 
 The base model for **x2** and **x4** scale ($`\text{model}_{\text{x2}}^{\text{fp}}`$ and $`\text{model}_{\text{x4}}^{\text{fp}}`$) are based on EDSR and SRResNet architectures respectively.  
 The correspinding checkpoints can be found in the folder `./checkpoints` and can be trained from scratch using this repository.
 
+<a name="subsec-restrictions"></a>
 ### Restrictions
 
 We count only matrix multiplications operations of binarized tensors as binary multiply–accumulate operations (MACs).
@@ -28,11 +48,13 @@ You can binarize the model's matrix operation in any way you want, but the follo
 For simplicity, we provide the baseline code and the training pipeline.
 You can use it to train your models.
 
+<a name="sec-evaluation"></a>
 ## Evaluation
 
 Evaluation is performed on closed test dataset: *ShadowSet*.  
 The metric for leaderboard (score) is based on computation complexity metric and its quality - PSNR metric value for each model.
 
+<a name="subsec-complexity-metric"></a>
 ### Complexity metric
 
 The complexity metric of the model depends on the amount of MACs and defined by the following formula:
@@ -47,10 +69,12 @@ The same formula for **x4** model:
 ```
 where the functions $`\text{MAC}^{\text{fp}}(\cdot)`$ and $`\text{MAC}^{\text{bin}}(\cdot)`$ denote the number of MAC operations for float point (fp) and binary operations (bin) respectively. The values $`\text{MAC}^{\text{fp}}\left(\text{model}_{\text{x2}}^{\text{fp}}\right)`$ and $`\text{MAC}^{\text{fp}}\left(\text{model}_{\text{x4}}^{\text{fp}}\right)`$ are calculated and strictly fixed, these values are corresponds to the checkpoints of the float point models $`\text{model}_{\text{x2}}^{\text{fp}}`$ and $`\text{model}_{\text{x4}}^{\text{fp}}`$ respectively.
 
+<a name="subsec-quality-metric"></a>
 ### Quality metric
 
 Quality metrics $`\text{psnr}_{\text{x2}}^{\text{fp}}`$, $`\text{psnr}_{\text{x4}}^{\text{fp}}`$, $`\text{psnr}_{\text{x2}}^{\text{bin}}`$, $`\text{psnr}_{\text{x4}}^{\text{bin}}`$ for float point and binarized **x2** and **x4** models, respectively, are based on average PSNR metric value on test dataset.
 
+<a name="subsec-scoring-metric"></a>
 ### Scoring metric
 
 The score is calculated for each model separately and based on complexity metric and the model quality (PSNR). The formula for the score is the following:
@@ -91,6 +115,7 @@ For the FP model the score is equal to the zero. In general, to obtain better sc
 > 1. If the $`\text{score}\left(\text{model}_{\text{x}\cdot}^{\text{bin}}\right)`$ will be less than 0.0 it will be replaced with zero as score for $`\text{model}_{\text{x}\cdot}^{\text{fp}}`$  
 > 2. If the $`\text{compexity}\left(\text{model}_{\text{x}\cdot}^{\text{bin}}\right)`$ will be more than 1.0 the model will be replaced with $`\text{model}_{\text{x}\cdot}^{\text{fp}}`$, so the score will be zero as for $`\text{model}_{\text{x}\cdot}^{\text{fp}}`$
 
+<a name="subsec-final-metric"></a>
 ### Final metric
 
 The score for leaderboard is the weighted sum of the two scores for $`\text{model}_{\text{x2}}^{\text{bin}}`$ and $`\text{model}_{\text{x4}}^{\text{bin}}`$:
@@ -102,8 +127,10 @@ The score for leaderboard is the weighted sum of the two scores for $`\text{mode
 > If the $`\text{model}_{\text{x2}}^{\text{bin}}`$ or  $`\text{model}_{\text{x4}}^{\text{bin}}`$ will not be provided the score for this model will be equal to zero as for $`\text{model}_{\text{x2}}^{\text{fp}}`$ or $`\text{model}_{\text{x4}}^{\text{fp}}`$
 
 
+<a name="sec-submission"></a>
 ## Submission
 
+<a name="subsec-description"></a>
 ### Description
 
 We expect you to submit the zip archive of work repository and models' checkpoints:  
@@ -124,6 +151,7 @@ def load(model_path, scale):
     return torch.load(model_path, map_location=torch.device("cpu")) if model_path else None
 ```
 
+<a name="subsec-testing"></a>
 ### Testing
 
 For model testing, we use private dataset: *ShadowSet*. By the way, you also can check that everything is fine by running the following command and check your score on Set14 dataset: 
@@ -132,8 +160,10 @@ For model testing, we use private dataset: *ShadowSet*. By the way, you also can
 python test.py --scalex2_model path/to/scalex2/checkpoint --scalex4_model path/to/scalex4/checkpoint
 ```
 
+<a name="sec-baselines"></a>
 ## Baselines
 
+<a name="subsec-requirements-and-installation"></a>
 ### Requirements and Installation
 We recommend to use `python 3.7`.  
 
@@ -151,6 +181,7 @@ export PYTHONPATH=/path/to/this/repository:$PYTHONPATH
 pip install -r bnn_competition/requirements.txt
 ```
 
+<a name="subsec-downloading-datasets"></a>
 ### Downloading datasets
 
 We use [DIV2K](link) dataset for training, and [Set5, Set4, B100, Urban100](link) datasets for benchmarking models.
@@ -159,6 +190,7 @@ We use [DIV2K](link) dataset for training, and [Set5, Set4, B100, Urban100](link
 2. Change paths in `bnn_competition/dataloaders/datasets_info.py` file.
 
 
+<a name="subsec-training"></a>
 ### Training
 
 To train the models, we use Pytorch Lightning framework, but you can use anything you want. The only requirement here is that the binary model which you upload to the competition is a torch model.
@@ -183,6 +215,7 @@ You also can train in the same way baselines 0th and 1st for **x2** and **x4** m
 |  Baseline 1st of binarized scale **x4** model      |   0.8141   | 31.9027 | 28.4166 | 27.4269 | 25.6058  |  28.9398  | `python bnn_competition/main.py --config bnn_competition/examples/bnn/scalex4_baseline-1.yaml --logdir results/scalex4_baseline-1 --gpu=0` |
 
 
+<a name="subsec-evaluating"></a>
 ### Evaluating
 
 To evaluate the model, run the following script
