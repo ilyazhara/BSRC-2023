@@ -184,7 +184,7 @@ pip install -r bnn_competition/requirements.txt
 <a name="subsec-downloading-datasets"></a>
 ### Downloading datasets
 
-We use [DIV2K](link) dataset for training, and [Set5, Set4, B100, Urban100](link) datasets for benchmarking models.
+We use [DIV2K](https://disk.yandex.ru/d/gkAbSsmGpH5RZA) dataset for training, and [Set5, Set4, B100, Urban100](https://disk.yandex.ru/d/2HGtAYvDjogNhQ) datasets for benchmarking models.
 
 1. Download datasets and extract it.  
 2. Change paths in `bnn_competition/dataloaders/datasets_info.py` file.
