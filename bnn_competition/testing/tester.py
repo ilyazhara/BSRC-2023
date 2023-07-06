@@ -132,7 +132,7 @@ class Tester:
                 )
                 model_info["complexity"] = model_complexity
                 model = self.wrap_model(model)
-                if model_complexity < 1.0:
+                if model_complexity <= 1.0:
                     model_psnr = self.test_model(model, scale=scale, device=device)
                     model_score = self.get_score(model_complexity, model_psnr, scale=scale)
                     model_info["info"] = "All checks are passed."
