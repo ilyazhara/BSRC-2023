@@ -221,6 +221,7 @@ You also can train in the same way baselines 0th and 1st for **x2** and **x4** m
 To evaluate the model, run the following script
 
 ```
+import torch
 from bnn_competition.evaluation import Evaluator
 
 
