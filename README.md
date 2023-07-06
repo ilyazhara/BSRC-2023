@@ -165,7 +165,7 @@ python test.py --scalex2_model path/to/scalex2/checkpoint --scalex4_model path/t
 
 <a name="subsec-requirements-and-installation"></a>
 ### Requirements and Installation
-We recommend to use `python 3.7`.  
+We recommend to use `python 3.7.13`.  
 
 1. Create the folder and clone the repository.  
 
