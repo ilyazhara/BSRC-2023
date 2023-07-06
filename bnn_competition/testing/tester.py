@@ -74,7 +74,7 @@ class Tester:
 
             return y
 
-        for x, y in tqdm(dataloader.loader):
+        for x, y in tqdm(dataloader.loader, desc=f"testing scalex{scale} model"):
             x = x.to(device)
             y = y.to(device)
             with torch.no_grad():
