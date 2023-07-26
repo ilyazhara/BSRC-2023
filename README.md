@@ -1,4 +1,6 @@
-# Binary Super-Resolution Challenge 2023
+# Binary Super-Resolution Challenge, 2023
+
+:link: Competition website: http://cscontest.ru/bsrc/
 
 * [Description](#sec-description)
     - [Goal](#subsec-goal)
