@@ -62,12 +62,12 @@ The metric for leaderboard (score) is based on computation complexity metric and
 The complexity metric of the model depends on the amount of MACs and defined by the following formula:
 
 ```math
-\text{compexity}\left(\text{model}_{\text{x2}}^{\text{bin}}\right) = \text{c}_{\text{x2}}^{\text{bin}} = \frac{1}{\text{MAC}^{\text{fp}}\left(\text{model}_{\text{x2}}^{\text{fp}}\right)}\left(\text{MAC}^{\text{fp}}\left(\text{model}_{\text{x2}}^{\text{bin}}\right) + \frac{1}{8}\text{MAC}^{\text{bin}}\left(\text{model}_{\text{x2}}^{\text{in}}\right)\right).
+\text{compexity}\left(\text{model}_{\text{x2}}^{\text{bin}}\right) = \text{c}_{\text{x2}}^{\text{bin}} = \frac{1}{\text{MAC}^{\text{fp}}\left(\text{model}_{\text{x2}}^{\text{fp}}\right)}\left(\text{MAC}^{\text{fp}}\left(\text{model}_{\text{x2}}^{\text{bin}}\right) + \frac{1}{8}\text{MAC}^{\text{bin}}\left(\text{model}_{\text{x2}}^{\text{bin}}\right)\right).
 ```
 
 The same formula for **x4** model:
 ```math
-\text{compexity}\left(\text{model}_{\text{x4}}^{\text{bin}}\right) = \text{c}_{\text{x4}}^{\text{bin}} = \frac{1}{\text{MAC}^{\text{fp}}\left(\text{model}_{\text{x4}}^{\text{fp}}\right)}\left(\text{MAC}^{\text{fp}}\left(\text{model}_{\text{x4}}^{\text{bin}}\right) + \frac{1}{8}\text{MAC}^{\text{bin}}\left(\text{model}_{\text{x4}}^{\text{in}}\right)\right),
+\text{compexity}\left(\text{model}_{\text{x4}}^{\text{bin}}\right) = \text{c}_{\text{x4}}^{\text{bin}} = \frac{1}{\text{MAC}^{\text{fp}}\left(\text{model}_{\text{x4}}^{\text{fp}}\right)}\left(\text{MAC}^{\text{fp}}\left(\text{model}_{\text{x4}}^{\text{bin}}\right) + \frac{1}{8}\text{MAC}^{\text{bin}}\left(\text{model}_{\text{x4}}^{\text{bin}}\right)\right),
 ```
 where the functions $`\text{MAC}^{\text{fp}}(\cdot)`$ and $`\text{MAC}^{\text{bin}}(\cdot)`$ denote the number of MAC operations for float point (fp) and binary operations (bin) respectively. The values $`\text{MAC}^{\text{fp}}\left(\text{model}_{\text{x2}}^{\text{fp}}\right)`$ and $`\text{MAC}^{\text{fp}}\left(\text{model}_{\text{x4}}^{\text{fp}}\right)`$ are calculated and strictly fixed, these values are corresponds to the checkpoints of the float point models $`\text{model}_{\text{x2}}^{\text{fp}}`$ and $`\text{model}_{\text{x4}}^{\text{fp}}`$ respectively.
 
