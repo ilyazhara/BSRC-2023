@@ -155,7 +155,7 @@ def load(model_path, scale):
     return torch.load(model_path, map_location=torch.device("cpu")) if model_path else None
 ```
 
-The size of the zip archive should not exceed 10 Mb.
+The size of the zip archive should not exceed 40 Mb.
 
 <a name="subsec-testing"></a>
 ### Testing
