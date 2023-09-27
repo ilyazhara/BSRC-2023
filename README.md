@@ -15,6 +15,7 @@
     - [Description](#subsec-description)
     - [Testing](#subsec-testing)
 * [Baselines](#sec-baselines)
+    - [Overview](#subsec-overview)
     - [Requirements and Installation](#subsec-requirements-and-installation)
     - [Downloading datasets](#subsec-downloading-datasets)
     - [Training](#subsec-training)
@@ -168,6 +169,16 @@ python test.py --scalex2_model path/to/scalex2/checkpoint --scalex4_model path/t
 
 <a name="sec-baselines"></a>
 ## Baselines
+
+<a name="subsec-overview"></a>
+### Overview
+The main part of the baseline 1st of binarized scale **x2** model is the following:
+![scalex2_baseline_v1](imgs/scalex2.png "Architecture of baseline_v1 solution for scalex2 model.")
+
+
+The main part of the baseline 1st of binarized scale **x4** model is the following:
+![scalex2_baseline_v1](imgs/scalex4.png "Architecture of baseline_v1 solution for scalex4 model.")
+
 
 <a name="subsec-requirements-and-installation"></a>
 ### Requirements and Installation
