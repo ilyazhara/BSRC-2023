@@ -1,3 +1,5 @@
+import warnings
+
 import torch
 import torchvision.transforms.functional as F
 from tqdm import tqdm
@@ -127,17 +129,29 @@ class Tester:
         if model:
             try:
                 model.eval()
-                model_complexity = ComplexityEstimator().estimate(
-                    model.to(torch.device("cpu")), torch.rand(self.INPUT_SHAPE), f"scalex{scale}_model"
-                )
-                model_info["complexity"] = model_complexity
-                model = self.wrap_model(model)
-                if model_complexity <= 1.0:
-                    model_psnr = self.test_model(model, scale=scale, device=device)
-                    model_score = self.get_score(model_complexity, model_psnr, scale=scale)
-                    model_info["info"] = "All checks are passed."
+                with warnings.catch_warnings(record=True) as caught_warnings:
+                    model_complexity = ComplexityEstimator().estimate(
+                        model.to(torch.device("cpu")), torch.rand(self.INPUT_SHAPE), f"scalex{scale}_model"
+                    )
+
+                einsum_detected = False
+                for warn in caught_warnings:
+                    if str(warn.message) == 'No handlers found: "aten::einsum". Skipped.':
+                        einsum_detected = True
+
+                if not einsum_detected:
+                    model_info["complexity"] = model_complexity
+                    model = self.wrap_model(model)
+                    if model_complexity <= 1.0:
+                        model_psnr = self.test_model(model, scale=scale, device=device)
+                        model_score = self.get_score(model_complexity, model_psnr, scale=scale)
+                        model_info["info"] = "All checks are passed."
+                    else:
+                        model_info["info"] = f"The model complexity {model_complexity} > 1.0."
+                        model_score = 0.0
+                        model_psnr = None
                 else:
-                    model_info["info"] = f"The model complexity {model_complexity} > 1.0."
+                    model_info["info"] = "Detected deprecated operation: torch.einsum!!!"
                     model_score = 0.0
                     model_psnr = None
             except NotBinaryException as e:
