@@ -40,13 +40,13 @@ The correspinding checkpoints can be found in the folder `./checkpoints` and can
 <a name="subsec-restrictions"></a>
 ### Restrictions
 
-We count only matrix multiplications operations of binarized tensors as binary multiply–accumulate operations (MACs).
-
+1. We count only matrix multiplications operations of binarized tensors as binary multiply–accumulate operations (MACs).
 You can binarize the model's matrix operation in any way you want, but the following requirements must be satisfied, in order to count this operation as the binary:
+    - This operation must be represented as conv2d, conv2d_transpose or linear layer in the model.
+    - This layer must be wrapped in `BinaryConv2d`, `BinaryConv2dTranspose` or `BinaryLinear` layer.
+    - If the `module` is the instance of one of the classes mentioned above, then the binarization process must happen in `module.input_binarizer(x)` and `module.weight_binarizer(module.weight)` for input activations `x` and module weights `module.weight`, respectively.    
 
-- This operation must be represented as conv2d, conv2d_transpose or linear layer in the model.
-- This layer must be wrapped in `BinaryConv2d`, `BinaryConv2dTranspose` or `BinaryLinear` layer.
-- If the `module` is the instance of one of the classes mentioned above, then the binarization process must happen in `module.input_binarizer(x)` and `module.weight_binarizer(module.weight)` for input activations `x` and module weights `module.weight`, respectively.
+2. The `torch.einsum` function is prohibited since it is hard to understand how many MACs it implies. Use `torch.matmul` instead.
 
 For simplicity, we provide the baseline code and the training pipeline.
 You can use it to train your models.
