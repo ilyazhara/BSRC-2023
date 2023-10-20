@@ -137,8 +137,8 @@ The score for leaderboard is the weighted sum of the two scores for $`\text{mode
 ### Description
 
 We expect you to submit the zip archive of work repository and models' checkpoints with the following structure:  
-* `scalex2.cpkt` - $`\text{model}_{\text{x2}}^{\text{bin}}`$ checkpoint (if it will not be provided it will be replaced with $`\text{model}_{\text{x2}}^{\text{fp}}`$)  
-* `scalex4.cpkt` - $`\text{model}_{\text{x4}}^{\text{bin}}`$ checkpoint (if it will not be provided it will be replaced with $`\text{model}_{\text{x4}}^{\text{fp}}`$)
+* `scalex2.ckpt` - $`\text{model}_{\text{x2}}^{\text{bin}}`$ checkpoint (if it will not be provided it will be replaced with $`\text{model}_{\text{x2}}^{\text{fp}}`$)  
+* `scalex4.ckpt` - $`\text{model}_{\text{x4}}^{\text{bin}}`$ checkpoint (if it will not be provided it will be replaced with $`\text{model}_{\text{x4}}^{\text{fp}}`$)
 * `competition` directory contains the code with the file `load.py`
 
 :grey_exclamation: Do not change the names of the checkpoints (it should be `scalex2.cpkt`, `scalex4.cpkt`) or name of the folder with the code (it should be `competition`).  
