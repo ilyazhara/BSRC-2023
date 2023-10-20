@@ -141,7 +141,7 @@ We expect you to submit the zip archive of work repository and models' checkpoin
 * `scalex4.ckpt` - $`\text{model}_{\text{x4}}^{\text{bin}}`$ checkpoint (if it will not be provided it will be replaced with $`\text{model}_{\text{x4}}^{\text{fp}}`$)
 * `competition` directory contains the code with the file `load.py`
 
-:grey_exclamation: Do not change the names of the checkpoints (it should be `scalex2.cpkt`, `scalex4.cpkt`) or name of the folder with the code (it should be `competition`).  
+:grey_exclamation: Do not change the names of the checkpoints (it should be `scalex2.ckpt`, `scalex4.ckpt`) or name of the folder with the code (it should be `competition`).  
 
 To load the models, you need to provide `load` function placed in `/competition/load.py`.  
 :grey_exclamation:  Do not change the location of the `load.py` file or rename `load` function.
